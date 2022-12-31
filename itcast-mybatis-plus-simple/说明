@@ -1,0 +1,2 @@
+MyBatis：Mapper接口 + Mapper的映射文件（SQL） + 核心配置文件
+MyBatis + MyBatisPlus：Mapper接口继承BaseMapper<T>接口 + Mapper的映射文件（不需要写SQL） + 核心配置文件
