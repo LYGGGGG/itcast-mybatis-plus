@@ -11,6 +11,7 @@
     <modules>
         <module>itcast-mybatis-plus-simple</module>
         <module>itcast-mybatis-plus-spring</module>
+        <module>itcast-mp-springboot</module>
     </modules>
     <dependencies>
         <!-- mybatis-plus插件依赖 -->
