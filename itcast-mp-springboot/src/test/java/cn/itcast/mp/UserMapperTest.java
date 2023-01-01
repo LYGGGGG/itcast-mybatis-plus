@@ -3,6 +3,8 @@ package cn.itcast.mp;
 import cn.itcast.mp.mapper.UserMapper;
 import cn.itcast.mp.pojo.User;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,15 +66,15 @@ public class UserMapperTest {
     @Test
     public void testDeleteByMap() {
         Map<String, Object> map = new HashMap<>();
-        map.put("name","刘备");
-        map.put("age",23);
+        map.put("name", "刘备");
+        map.put("age", 23);
         userMapper.deleteByMap(map);
     }
 
     @Test
     public void testDeleteByWrapper() {
         QueryWrapper<User> wrapper = new QueryWrapper<>();
-        wrapper.eq("name","曹操");
+        wrapper.eq("name", "曹操");
         userMapper.delete(wrapper);
     }
 
@@ -94,5 +96,20 @@ public class UserMapperTest {
         int result = userMapper.updateById(user);
         System.out.println(result > 0 ? "修改成功！" : "修改失败！");
         System.out.println("受影响的行数为：" + result);
+    }
+
+    @Test
+    public void testSelectPage() {
+        Page<User> page = new Page<>(1, 1);
+
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.like("email", "test");
+        IPage<User> userIPage = userMapper.selectPage(page, wrapper);
+        System.out.println("数据总条数：" + userIPage.getTotal());
+        System.out.println("数据总页数：" + userIPage.getPages());
+        System.out.println("当前页：" + userIPage.getCurrent());
+        List<User> records = userIPage.getRecords();
+        records.forEach(user -> System.out.println(user));
+
     }
 }
